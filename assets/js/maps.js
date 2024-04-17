@@ -86,7 +86,7 @@ function getGeoCode (address) {
 
 function searchMapBox (geoCode) {
 // console.log(geoCode)
-mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHVyc3pyaTcwYjJjMnZwZGV3eWRiam85In0.QTxq_aWZ5_XYAI4Q1xcyfg';
+mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHVyc2xmanMwYjI5MnFueHFhMzd5OThnIn0.CTeJp4g_VXPZfnwgsG3GBQ';
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v12',
