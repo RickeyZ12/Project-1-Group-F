@@ -36,9 +36,12 @@ function createReservationCard () {
     }       
 
     //Display reservations within specified div
-    let nameH3 = document.createElement("h3")
-    nameH3.textContent = "Name: " + reservationCard.name
-    reservationCardEl.appendChild(nameH3)
+    let nameH4 = document.createElement("h4")
+    nameH4.textContent = "Name: " + reservationCard.name
+    nameH4.classList.add("title")
+    nameH4.classList.add("is-4")
+    nameH4.style.marginBottom = "2px"
+    reservationCardEl.appendChild(nameH4)
 
     let phoneP = document.createElement("p");
     phoneP.textContent = "Phone: " + reservationCard.phone;
@@ -48,13 +51,17 @@ function createReservationCard () {
     emailP.textContent = "Email: " + reservationCard.email  
     reservationCardEl.appendChild(emailP);
 
-    let reservationTitle = document.createElement("h1")
+    let reservationTitle = document.createElement("h2")
     reservationTitle.textContent = "Your Reservation is for:"
+    reservationTitle.style.marginTop = "10px"
+    reservationTitle.setAttribute("class", "title is-2")
+
     reservationCardEl.appendChild(reservationTitle);
 
     
-    let dateH3 = document.createElement("h1")
+    let dateH3 = document.createElement("h3")
     dateH3.textContent = reservationCard.date + " " + reservationCard.hour
+    dateH3.setAttribute("class", "title is-3")
     reservationCardEl.appendChild(dateH3) 
     
     const deleteReservationsBtn = document.createElement("button")
