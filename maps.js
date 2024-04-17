@@ -16,6 +16,9 @@ const inputEl = document.getElementById("input-div")
 const outputLocation = document.getElementById("output-location")
 
 
+
+
+
 //On click of submit, information will be gathered from input fields
 directionsSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -79,6 +82,8 @@ function getGeoCode (address) {
 
 
 
+
+
 function searchMapBox (geoCode) {
 // console.log(geoCode)
 mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHVyc3pyaTcwYjJjMnZwZGV3eWRiam85In0.QTxq_aWZ5_XYAI4Q1xcyfg';
@@ -97,6 +102,8 @@ map.setMaxBounds(bounds);
 
 // an arbitrary start will always be the same
 // only the end or destination will change
+
+
 const start = geoCode || restaurantLocation;
 
 // this is where the code for the next step will go
@@ -160,10 +167,30 @@ let tripInstructions = '';
 for (const step of steps) {
   tripInstructions += `<li>${step.maneuver.instruction}</li>`;
 }
-instructions.innerHTML = `<p>Trip duration: ${Math.floor(
-  data.duration / 60
-)} </p><ol>${tripInstructions}</ol>`;
-  }
+
+//Get default value and convert to hours and minutes
+const tripMinutes = data.duration / 60
+const tripHours = Math.floor(tripMinutes / 60)
+const remainingMinutes = Math.floor(tripMinutes % 60)
+
+if (tripHours == 1) {
+  instructions.innerHTML = `<p>Trip duration: ${tripHours} hour ${remainingMinutes} Minutes
+ </p><ol>${tripInstructions}</ol>`;
+}
+
+else if (tripHours < 1) {
+  instructions.innerHTML = `<p>Trip duration: ${remainingMinutes} Minutes
+  </p><ol>${tripInstructions}</ol>`;
+}
+
+else {
+  instructions.innerHTML = `<p>Trip duration: ${tripHours} hours ${remainingMinutes} Minutes
+ </p><ol>${tripInstructions}</ol>`;
+}
+
+instructions.innerHTML = `<p>Trip duration: ${tripHours} ${textHours} ${remainingMinutes} Minutes
+ </p><ol>${tripInstructions}</ol>`;
+} //end async function
   
   map.on('load', () => {
     // make an initial directions request that
@@ -200,51 +227,51 @@ instructions.innerHTML = `<p>Trip duration: ${Math.floor(
   });
 
 
-  // map.on('click', (event) => {
-  //   const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
-  //   const start = {
-  //     type: 'FeatureCollection',
-  //     features: [
-  //       {
-  //         type: 'Feature',
-  //         properties: {},
-  //         geometry: {
-  //           type: 'Point',
-  //           coordinates: coords
-  //         }
-  //       }
-  //     ]
-  //   };
-  //   if (map.getLayer('start')) {
-  //     map.getSource('start').setData(start);
-  //   } else {
-  //     map.addLayer({
-  //       id: 'start',
-  //       type: 'circle',
-  //       source: {
-  //         type: 'geojson',
-  //         data: {
-  //           type: 'FeatureCollection',
-  //           features: [
-  //             {
-  //               type: 'Feature',
-  //               properties: {},
-  //               geometry: {
-  //                 type: 'Point',
-  //                 coordinates: coords
-  //               }
-  //             }
-  //           ]
-  //         }
-  //       },
-  //       paint: {
-  //         'circle-radius': 10,
-  //         'circle-color': '#f30'
-  //       }
-  //     });
-  //   }
-  //   getRoute(coords);
-  // });
+  map.on('click', (event) => {
+    const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
+    const start = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Point',
+            coordinates: coords
+          }
+        }
+      ]
+    };
+    if (map.getLayer('start')) {
+      map.getSource('start').setData(start);
+    } else {
+      map.addLayer({
+        id: 'start',
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: coords
+                }
+              }
+            ]
+          }
+        },
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#f30'
+        }
+      });
+    }
+    getRoute(coords);
+  });
 } //end searchMapBox ()
 
 

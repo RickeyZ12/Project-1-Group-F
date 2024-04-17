@@ -3,26 +3,72 @@ body {
     padding: 0;
 }
 
+main {
+    margin-top: 100px;
+}
+
+.container {
+    padding: 2%;
+}
+
+/* Reservations */
+
+.reservations-container {
+    text-align: center;
+}
+
+#reservations-card-container {
+    background-color: rgb(168, 168, 168);
+    border-radius: 20px;
+}
+
+.js-modal-trigger {
+    margin-bottom: 1rem;    
+}
+
+/* Modal */
+
+#email {
+    margin-left: 0;
+}
+
+/* Directions inputs */
+
+#directions-container {
+    margin: 20px 0;
+    border-top: solid;
+    padding-top: 10px;
+}
+
 #input-div {
     margin-bottom: 20px;
 }
 
-#input-div p {
-    display: inline;
-    margin-right: 2%;
+#input-div .input-field {
+    display: inline-block;
+}
+
+#input-div .input-field #state {
+    width: 50px;
 }
 
 #RU-location {
-    display: flex;
+    margin-top: 20px;
 }
 
 #RU-location p {
-    margin-right: 10px;
+    display: inline-block;
 }
+
+#directions-container button {
+    margin-top: 20px;
+}
+
+/* Map */
 
 #map-container {
     position: relative;
-    /* height: 200px; */        
+    height: 500px;
 }
 
 #map {
@@ -43,12 +89,23 @@ body {
   bottom: 20%;
   padding: 20px;
   background-color: black;
-  color: white;
+  color: #ffffff;
   overflow-y: scroll;
   font-family: sans-serif;
 }
 
 #instructions.is-active {
     display: block;
+}
+
+@media screen and (max-width: 850px) {
+    main .container:first-child h1 {
+        text-align: center;
+    }
+    
+    #input-div .input-field {
+        display: block;
+        margin-bottom: 5px;        
+    }
 }
 
