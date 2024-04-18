@@ -116,7 +116,7 @@ map.setMaxBounds(bounds);
 // only the end or destination will change
 
 
-const start = geoCode || restaurantLocation || ;
+const start = geoCode || restaurantLocation
 
 // this is where the code for the next step will go
 // create a function to make a directions request
