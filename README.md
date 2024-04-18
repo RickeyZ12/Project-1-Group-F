@@ -43,7 +43,7 @@ This is a website for a restaurant that was created by us. It allows the user to
 
 * https://rickeyz12.github.io/Project-1-Group-F/
 * This is our main page where you will see the menu. You can click on the "Reservations & Directions" button, which will take you to our second page with a reservation button and map.
-* To use the code, open index.html in deafult browser (This is our main landing page).
+* To use the code, open index.html in default browser (This is our main landing page).
 
 
 ## Wireframe
