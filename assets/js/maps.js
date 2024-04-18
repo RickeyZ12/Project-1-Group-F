@@ -22,6 +22,7 @@ if (navigator.geolocation && window.location.protocol === 'https:') {
       const longitude = position.coords.longitude;
       const latitude = position.coords.latitude;
       searchMapBox([longitude, latitude])
+      instructions.classList.add("is-active")
     }
     
 
@@ -48,7 +49,7 @@ directionsSubmitBtn.addEventListener("click", function (e) {
   //Clear 
   
   //Display directions box
-  instructions.classList.add("is-active")
+  
 
   
   
@@ -239,51 +240,7 @@ instructions.innerHTML = `<p>Trip duration: ${tripHours} ${textHours} ${remainin
   });
 
 
-  map.on('click', (event) => {
-    const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
-    const start = {
-      type: 'FeatureCollection',
-      features: [
-        {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'Point',
-            coordinates: coords
-          }
-        }
-      ]
-    };
-    if (map.getLayer('start')) {
-      map.getSource('start').setData(start);
-    } else {
-      map.addLayer({
-        id: 'start',
-        type: 'circle',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                properties: {},
-                geometry: {
-                  type: 'Point',
-                  coordinates: coords
-                }
-              }
-            ]
-          }
-        },
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#f30'
-        }
-      });
-    }
-    getRoute(coords);
-  });
+
 } //end searchMapBox ()
 
 

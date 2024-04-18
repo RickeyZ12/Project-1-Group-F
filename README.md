@@ -40,7 +40,8 @@ This is a website for a restaurant that was created by us. It allows the user to
 * Geocode API (https://geocode.maps.co/)
 
 ## Wireframe
-![WIREFRAME](./assets/images/wireframe.png)
+![WIREFRAME](./assets/images/wireframe.PNG)
 
 ## Screenshots
-![This is how it should look like](./assets/images/project1.png)
+![MENU PAGE](./assets/images/project1.png)
+![MAPS PAGE](./assets/images/MapScreenshot.PNG)
