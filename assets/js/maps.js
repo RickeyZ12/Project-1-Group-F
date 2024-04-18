@@ -15,12 +15,16 @@ const RULocation = document.getElementById("RU-location")
 const inputEl = document.getElementById("input-div")
 const outputLocation = document.getElementById("output-location")
 
+
 if (navigator.geolocation && window.location.protocol === 'https:') {
   navigator.geolocation.getCurrentPosition((position)=>{
-    const longitude = position.coords.longitude;
-    const latitude = position.coords.latitude;
-    console.log(longitude)
-    console.log(latitude)
+    if(position.coords) {
+      const longitude = position.coords.longitude;
+      const latitude = position.coords.latitude;
+      searchMapBox([longitude, latitude])
+    }
+    
+
    });
  }
 
@@ -112,7 +116,7 @@ map.setMaxBounds(bounds);
 // only the end or destination will change
 
 
-const start = geoCode || restaurantLocation;
+const start = geoCode || restaurantLocation || ;
 
 // this is where the code for the next step will go
 // create a function to make a directions request
