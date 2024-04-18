@@ -118,15 +118,15 @@ function openModal () {
 
         else if(isNaN(phoneFour) || phoneFour.length !==4) {
             errorMessage.textContent = "Please enter a valid phone number (last four)"                
-            }
-
-        else if (hour == "noHour") {
-            errorMessage.textContent = "Please select an hour"
         }
 
         else if (date == "") {
-            errorMessage.textContent = "Please choose a date"
+                errorMessage.textContent = "Please choose a date"
         }
+        
+        else if (hour == "noHour") {
+            errorMessage.textContent = "Please select an hour"
+        }       
 
         else {
             //Reformat items to display on page properly
