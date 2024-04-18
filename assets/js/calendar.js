@@ -57,7 +57,6 @@ function createReservationCard () {
     reservationTitle.setAttribute("class", "title is-2")
 
     reservationCardEl.appendChild(reservationTitle);
-
     
     let dateH3 = document.createElement("h3")
     dateH3.textContent = reservationCard.date + " " + reservationCard.hour
@@ -69,6 +68,8 @@ function createReservationCard () {
     deleteReservationsBtn.setAttribute("class", "button is-small is-danger")
     reservationCardEl.appendChild(deleteReservationsBtn)
 
+    reservationCardEl.classList.add("is-active")
+
     //Delete reservation button
     deleteReservationsBtn.addEventListener("click", () => {
     
@@ -79,7 +80,8 @@ function createReservationCard () {
         }
         else {
         reservationCardEl.innerHTML = 'Your Reservation has been cancelled. Please click above if you wish to make new reservations.'
-        localStorage.removeItem('reservationCard')    
+        localStorage.removeItem('reservationCard') 
+        reservationCardEl.classList.remove("is-active")   
         }
     })
 }     
