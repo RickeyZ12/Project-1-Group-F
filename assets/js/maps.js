@@ -1,5 +1,5 @@
 //Constant locations
-console.log("original working file")
+
 const restaurantLocation = [-74.444122, 40.495949]
 const southwestGB = [-76.612190, 39.290386]
 const northeastGB = [-71.058884, 60]
@@ -16,22 +16,6 @@ const inputEl = document.getElementById("input-div")
 const outputLocation = document.getElementById("output-location")
 
 
-if (navigator.geolocation && window.location.protocol === 'https:') {
-  navigator.geolocation.getCurrentPosition((position)=>{
-    if(position.coords) {
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      searchMapBox([longitude, latitude])
-      instructions.classList.add("is-active")
-    }
-    
-
-   });
- }
-
- 
-
-
 //On click of submit, information will be gathered from input fields
 directionsSubmitBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -45,28 +29,16 @@ directionsSubmitBtn.addEventListener("click", function (e) {
   
   //Run function getGeoCode with the address object passed as parameter
   getGeoCode(address)
-  
-  //Clear 
-  
-  //Display directions box
-  
 
-  
-  
+  //Show instructions on screen
+  instructions.classList.add("is-active")
 })
 
 //Get lon and lat (needs to be lon first) from geocode.maps
 function getGeoCode (address) {  
-  // 
-  
-
-
   fetch(`https://geocode.maps.co/search?street=${address.street}&city=${address.city}&state=${address.state}&api_key=6618462d030c4415664524agrd0b0bd`)
-  .then(function (response) {
-  
-    
-  return response.json()
-    
+  .then(function (response) {    
+  return response.json()   
   })
   .then(function (data) {
     if(data.length == 0) {
@@ -77,28 +49,20 @@ function getGeoCode (address) {
       let geoCode = [data[0].lon, data[0].lat]  
       searchMapBox(geoCode) 
       //Displays what address you entered below input fields
-      showYourLocation(geoCode)
-       //Clear Inputs. Need value available for showYourLocation(). Multiple fetch requests not allowed with free api
-  
+      showYourLocation(geoCode)      
     }
 
+     //Clear Inputs. Need value available for showYourLocation(). Multiple fetch requests not allowed with free api  
     streetInputEl.value = '';
     cityInputEl.value = '';
     stateInputEl.value = '';
-
-   
-    // let geoCode = [data[0].lon, data[0].lat]    
-    
-    // searchMapBox(geoCode)
-})
+  })
 }
 
-
-
-
-
 function searchMapBox (geoCode) {
-// console.log(geoCode)
+
+//Show instructions on screen
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHY0aDF4cnUwOHFrMmlyNHdqZnU3dzM1In0.F3Mg1gD7ilJqRBB0qNki6w';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -106,29 +70,16 @@ const map = new mapboxgl.Map({
   center: restaurantLocation, // starting position
   zoom: 12
 });
+
 // set the bounds of the map
-const bounds = [
-  southwestGB, northeastGB
-  
-];
+const bounds = [southwestGB, northeastGB];
 map.setMaxBounds(bounds);
-
-// an arbitrary start will always be the same
-// only the end or destination will change
-
 
 const start = geoCode || restaurantLocation
 
-// this is where the code for the next step will go
-// create a function to make a directions request
-
-
 async function getRoute(end) {
-    // make a directions request using cycling profile
-    // an arbitrary start will always be the same
-    // only the end or destination will change
-    // console.log(start)
-    const query = await fetch(
+   
+  const query = await fetch(
       `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
       { method: 'GET' }
     );
@@ -169,10 +120,8 @@ async function getRoute(end) {
         }
       });
     }
-    // add turn instructions here at the end
-     //Show Directions
-
-  // get the sidebar and add the instructions
+   
+// get the sidebar and add the instructions
 const instructions = document.getElementById('instructions');
 const steps = data.legs[0].steps;
 
@@ -203,9 +152,10 @@ else {
 
 instructions.innerHTML = `<p>Trip duration: ${tripHours} ${textHours} ${remainingMinutes} Minutes
  </p><ol>${tripInstructions}</ol>`;
+
 } //end async function
   
-  map.on('load', () => {
+map.on('load', () => {
     // make an initial directions request that
     // starts and ends at the same location
     // getRoute(start);
@@ -235,29 +185,22 @@ instructions.innerHTML = `<p>Trip duration: ${tripHours} ${textHours} ${remainin
         'circle-radius': 10,
         'circle-color': '#3887be'
       }
-    });
-    // this is where the code from the next step will go
+    });   
   });
 
+} //end searchMapBox()
 
 
-} //end searchMapBox ()
-
-
-//Show what you've entered below input fields.  MAYBE DO THIS SO IT CONVERTS BACK TO ADDRESS
-function showYourLocation (data) {
+//Show what you've entered below input fields.
+function showYourLocation (data) {  
   if(data.length == 0) {
     outputLocation.textContent = ``
   }
 
   else{
     outputLocation.textContent = `You've entered: ${streetInputEl.value}, ${cityInputEl.value}, ${stateInputEl.value}`
-
   }
-  
- 
-
-  }
+}
 
 //Run directions on page load based on previous directions that you gave it from previous session
 searchMapBox()

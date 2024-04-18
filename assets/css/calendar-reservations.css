@@ -17,9 +17,10 @@ main {
     text-align: center;
 }
 
-#reservations-card-container {
-    background-color: rgb(168, 168, 168);
+#reservations-card-container.is-active {
+    border: 15px solid;
     border-radius: 20px;
+    padding: 15px 0;
 }
 
 .js-modal-trigger {
