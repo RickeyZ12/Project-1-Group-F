@@ -15,8 +15,16 @@ const RULocation = document.getElementById("RU-location")
 const inputEl = document.getElementById("input-div")
 const outputLocation = document.getElementById("output-location")
 
+if (navigator.geolocation && window.location.protocol === 'https:') {
+  navigator.geolocation.getCurrentPosition((position)=>{
+    const longitude = position.coords.longitude;
+    const latitude = position.coords.latitude;
+    console.log(longitude)
+    console.log(latitude)
+   });
+ }
 
-
+ 
 
 
 //On click of submit, information will be gathered from input fields
