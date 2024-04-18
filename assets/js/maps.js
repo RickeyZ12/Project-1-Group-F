@@ -1,5 +1,5 @@
 //Constant locations
-console.log("original working file")
+
 const restaurantLocation = [-74.444122, 40.495949]
 const southwestGB = [-76.612190, 39.290386]
 const northeastGB = [-71.058884, 60]
@@ -29,6 +29,9 @@ directionsSubmitBtn.addEventListener("click", function (e) {
   
   //Run function getGeoCode with the address object passed as parameter
   getGeoCode(address)
+
+  //Show instructions on screen
+  instructions.classList.add("is-active")
 })
 
 //Get lon and lat (needs to be lon first) from geocode.maps
@@ -57,6 +60,9 @@ function getGeoCode (address) {
 }
 
 function searchMapBox (geoCode) {
+
+//Show instructions on screen
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHY0aDF4cnUwOHFrMmlyNHdqZnU3dzM1In0.F3Mg1gD7ilJqRBB0qNki6w';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -72,11 +78,8 @@ map.setMaxBounds(bounds);
 const start = geoCode || restaurantLocation
 
 async function getRoute(end) {
-    // make a directions request using cycling profile
-    // an arbitrary start will always be the same
-    // only the end or destination will change
-    // console.log(start)
-    const query = await fetch(
+   
+  const query = await fetch(
       `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
       { method: 'GET' }
     );
