@@ -16,7 +16,19 @@ const inputEl = document.getElementById("input-div")
 const outputLocation = document.getElementById("output-location")
 
 
+if (navigator.geolocation && window.location.protocol === 'https:') {
+  navigator.geolocation.getCurrentPosition((position)=>{
+    if(position.coords) {
+      const longitude = position.coords.longitude;
+      const latitude = position.coords.latitude;
+      searchMapBox([longitude, latitude])
+    }
+    
 
+   });
+ }
+
+ 
 
 
 //On click of submit, information will be gathered from input fields
@@ -86,7 +98,7 @@ function getGeoCode (address) {
 
 function searchMapBox (geoCode) {
 // console.log(geoCode)
-mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHVyc3pyaTcwYjJjMnZwZGV3eWRiam85In0.QTxq_aWZ5_XYAI4Q1xcyfg';
+mapboxgl.accessToken = 'pk.eyJ1Ijoiem11ZGE0NCIsImEiOiJjbHY0aDF4cnUwOHFrMmlyNHdqZnU3dzM1In0.F3Mg1gD7ilJqRBB0qNki6w';
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v12',
@@ -104,7 +116,7 @@ map.setMaxBounds(bounds);
 // only the end or destination will change
 
 
-const start = geoCode || restaurantLocation;
+const start = geoCode || restaurantLocation
 
 // this is where the code for the next step will go
 // create a function to make a directions request
