@@ -51,4 +51,4 @@ This is a website for a restaurant that was created by us. It allows the user to
 
 ## Screenshots
 ![MENU PAGE](./assets/images/project1.png)
-![MAPS PAGE](./assets/images/MapScreenshot.PNG)
+![MAPS PAGE](./assets/images/mappage.PNG)
