@@ -260,6 +260,6 @@ function showYourLocation (data) {
   }
 
 //Run directions on page load based on previous directions that you gave it from previous session
-searchMapBox()
+// searchMapBox()
 
  
